@@ -33,7 +33,24 @@
     <main>
         <section id="phone-container" class="grid grid-cols-3 gap-4 my-8">
             <!-- phone detail goes here -->
+
         </section>
+        <!-- phone details modal -->
+        <div  class="mx-auto w-[200px]">
+            <button id="show-all-btn" class="btn btn-primary my-4 text-center hidden">Show All</button>
+        </div>
+
+        <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+        <div class="modal modal-bottom sm:modal-middle text-center">
+            <div class="modal-box p-4">
+                <div id="detail-container">
+
+                </div>
+                <div class="modal-action">
+                    <label for="my-modal-6" class="btn">Close</label>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- phone hunter js -->
     <script src="./js/script.js"></script>
