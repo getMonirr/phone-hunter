@@ -1,23 +1,23 @@
 // global sector
 const phoneContainer = document.getElementById('phone-container');
+const showAllBtn = document.getElementById('show-all-btn');
 // get phone data
-const getPhoneData = async (clientSearch) => {
+const getPhoneData = async (clientSearch, perPage) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${clientSearch}`);
     const data = await res.json();
-    setPhoneData(data.data);
+    setPhoneData(data.data, perPage);
 }
 // set phone data
-const setPhoneData = (data) => {
-    const showAllBtn = document.getElementById('show-all-btn');
+const setPhoneData = (data, perPage) => {
     console.log(data);
     phoneContainer.innerHTML = '';
-    if (data.length > 10) {
+    if (perPage && data.length > 10) {
         showAllBtn.classList.remove('hidden')
     } else {
         showAllBtn.classList.add('hidden')
 
     }
-    data.slice(0, 10).forEach(phone => {
+    data.slice(0, `${perPage ? perPage : `${data.length}`}`).forEach(phone => {
         displayPhoneUI(phone)
     })
 }
@@ -46,17 +46,24 @@ const displayPhoneUI = (phone) => {
 }
 
 // search handler
-const searchInput = document.getElementById('search-input')
+const processSearch = (perPage) => {
+    const searchInput = document.getElementById('search-input')
+    clientSearchText = searchInput.value;
+    getPhoneData(clientSearchText, perPage);
+}
 
 const handleSearch = () => {
-    clientSearchText = searchInput.value;
-    getPhoneData(clientSearchText);
+    processSearch(10)
 }
+// show all btn
+showAllBtn.addEventListener('click', () => {
+    processSearch();
+})
 // search btn add event listener
 document.getElementById('search-btn').addEventListener('click', handleSearch);
 
 // for enter 
-searchInput.addEventListener('keypress', (e) => {
+document.getElementById('search-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         handleSearch();
     }
@@ -94,5 +101,4 @@ const showDetailsUI = (data) => {
 }
 
 
-
-getPhoneData('iphone');
+getPhoneData('iphone', 5);
