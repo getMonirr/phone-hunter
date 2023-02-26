@@ -20,7 +20,8 @@
             </div>
             <div class="flex-none gap-2">
                 <div class="form-control">
-                    <input id="search-input" type="text" placeholder="Search" class="input input-bordered" />
+                    <input id="search-input" type="text" placeholder="Search" class="input input-bordered"
+                        value="iphone" />
                 </div>
                 <button id="search-btn" class="btn btn-primary">Search</button>
             </div>
@@ -36,10 +37,35 @@
 
         </section>
         <!-- phone details modal -->
-        <div  class="mx-auto w-[200px]">
+        <div class="mx-auto w-[200px]">
             <button id="show-all-btn" class="btn btn-primary my-4 text-center hidden">Show All</button>
         </div>
-
+        <!-- no phone found -->
+        <div id="not-found" class="alert alert-error shadow-lg w-1/2 hidden mx-auto">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Error! Task failed successfully.</span>
+            </div>
+        </div>
+        <!-- spinner -->
+        <div id="loader" class="h-96 justify-center items-center flex mx-auto hidden">
+            <button  type="button"
+            class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed mx-auto"
+            disabled="">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
+            Processing...
+        </button>
+        </div>
         <input type="checkbox" id="my-modal-6" class="modal-toggle" />
         <div class="modal modal-bottom sm:modal-middle text-center">
             <div class="modal-box p-4">

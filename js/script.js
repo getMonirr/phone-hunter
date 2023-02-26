@@ -1,6 +1,7 @@
 // global sector
 const phoneContainer = document.getElementById('phone-container');
 const showAllBtn = document.getElementById('show-all-btn');
+const notFound = document.getElementById('not-found');
 // get phone data
 const getPhoneData = async (clientSearch, perPage) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${clientSearch}`);
@@ -9,8 +10,10 @@ const getPhoneData = async (clientSearch, perPage) => {
 }
 // set phone data
 const setPhoneData = (data, perPage) => {
-    console.log(data);
     phoneContainer.innerHTML = '';
+    data.length === 0
+        ? notFound.classList.remove('hidden')
+        : notFound.classList.add('hidden');
     if (perPage && data.length > 10) {
         showAllBtn.classList.remove('hidden')
     } else {
@@ -43,8 +46,17 @@ const displayPhoneUI = (phone) => {
             </div>
     `;
     phoneContainer.appendChild(div);
+    loadingHandle(false);
 }
 
+// loading spin
+const loadingHandle = (isLoading) => {
+    if(isLoading){
+        document.getElementById('loader').classList.remove('hidden');
+    }else{
+        document.getElementById('loader').classList.add('hidden');
+    }
+}
 // search handler
 const processSearch = (perPage) => {
     const searchInput = document.getElementById('search-input')
@@ -53,6 +65,7 @@ const processSearch = (perPage) => {
 }
 
 const handleSearch = () => {
+    loadingHandle(true)
     processSearch(10)
 }
 // show all btn
@@ -101,4 +114,4 @@ const showDetailsUI = (data) => {
 }
 
 
-getPhoneData('iphone', 5);
+// getPhoneData('iphone', 5);
